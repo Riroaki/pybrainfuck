@@ -40,10 +40,10 @@ def evaluate(code: list):
             data.append(0)
 
     def parse_out():
-        sys.stdout.write(chr(data[ptr['data']]))
+        sys.stdout.write(str(data[ptr['data']]))
 
     def parse_in():
-        data[ptr['data']] = getch()
+        data[ptr['data']] = ord(getch())
 
     def parse_loop_start():
         if data[ptr['data']] == 0:
@@ -77,9 +77,13 @@ def execute(source: str):
 
 
 def main():
-    with open('test.bf', 'r') as f:
-        source = f.read()
-    execute(source)
+    if len(sys.argv) != 2:
+        print('Please specify name of brainfuck scripts(*.bf)!')
+    else:
+        script = sys.argv[1]
+        with open(script, 'r') as f:
+            source = f.read()
+        execute(source)
 
 
 if __name__ == '__main__':
